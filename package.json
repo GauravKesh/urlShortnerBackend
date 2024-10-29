@@ -43,6 +43,7 @@
     "express-rate-limit": "^7.4.1",
     "helmet": "^8.0.0",
     "mongoose": "^8.7.3",
+    "redis": "^4.7.0",
     "winston": "^3.13.0",
     "winston-mongodb": "^6.0.0"
   }

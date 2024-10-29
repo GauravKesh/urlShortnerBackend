@@ -7,7 +7,7 @@ const responseMessage = require('./constant/responseMessage.js')
 const httpError = require('./util/httpError.js')
 const app = express()
 const { limiter } = require('./util/apiRateLimit')
-const allowedOrigins = ['http://localhost:3000']
+const allowedOrigins = ['http://localhost:3000', 'https://gshort.vercel.app/']
 
 const corsOptions = {
     origin: function (origin, callback) {
