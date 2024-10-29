@@ -6,7 +6,7 @@ const helmet = require('helmet')
 const responseMessage = require('./constant/responseMessage.js')
 const httpError = require('./util/httpError.js')
 const app = express()
-const {limiter} = require('./util/apiRateLimit')
+const { limiter } = require('./util/apiRateLimit')
 const allowedOrigins = ['http://localhost:3000']
 
 const corsOptions = {
@@ -23,7 +23,7 @@ const corsOptions = {
 }
 app.use(cors(corsOptions))
 // Middleware
-app.use(express.urlencoded({ extended: true })); // Parses incoming URL-encoded data
+app.use(express.urlencoded({ extended: true })) // Parses incoming URL-encoded data
 app.use(express.json())
 app.use('/api/v1', router)
 app.use(helmet())

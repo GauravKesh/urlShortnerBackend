@@ -1,4 +1,3 @@
-// src/api/router/apiRouter.js
 const express = require('express')
 const { createShortUrl, redirectShortUrl } = require('../controller/apiController.js')
 
