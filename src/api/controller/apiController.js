@@ -30,6 +30,7 @@ exports.redirectShortUrl = async (req, res) => {
     try {
         const url = await Url.findOne({ shortCode })
         if (url) {
+            await Url.updateOne({ shortCode }, { $inc: { clicks: 1 } })
             logger.info(`Redirecting to original URL: ${url.originalUrl}`)
             return res.redirect(url.originalUrl)
         } else {
