@@ -1,5 +1,4 @@
 const winston = require('winston')
-require('winston-mongodb') // This adds MongoDB transport capability
 const EApplicationEnvironment = require('../constant/application.js')
 const dotenv = require('dotenv')
 
@@ -33,20 +32,21 @@ if (process.env.NODE_ENV === EApplicationEnvironment.DEVELOPMENT) {
             format: format.combine(format.colorize(), format.simple())
         })
     )
-} else if (process.env.NODE_ENV === EApplicationEnvironment.PRODUCTION) {
-    // Add MongoDB transport for production
-    logger.add(
-        new winston.transports.MongoDB({
-            level: 'info',
-            db: process.env.MONGO_URI, // MongoDB connection URI
-            collection: 'logs', // MongoDB collection for logs
-            options: {
-                useNewUrlParser: true,
-                useUnifiedTopology: true
-            },
-            format: format.combine(format.timestamp(), format.json())
-        })
-    )
-}
+} 
+// else if (process.env.NODE_ENV === EApplicationEnvironment.PRODUCTION) {
+//     // Add MongoDB transport for production
+//     logger.add(
+//         new winston.transports.MongoDB({
+//             level: 'info',
+//             db: process.env.MONGO_URI, // MongoDB connection URI
+//             collection: 'logs', // MongoDB collection for logs
+//             options: {
+//                 useNewUrlParser: true,
+//                 useUnifiedTopology: true
+//             },
+//             format: format.combine(format.timestamp(), format.json())
+//         })
+//     )
+// }
 
 module.exports = logger
