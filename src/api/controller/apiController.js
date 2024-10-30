@@ -8,7 +8,6 @@ exports.createShortUrl = async (req, res) => {
     if (!originalUrl) {
         res.status(400).json({ message: 'Original URL is required' })
     }
-
     try {
         // Generate a unique short code
         const shortCode = generateShortCode()
@@ -29,22 +28,16 @@ exports.redirectShortUrl = async (req, res) => {
     console.log('Received short code:', shortCode)
 
     try {
-        // Find the original URL associated with the short code
         const url = await Url.findOne({ shortCode })
         if (url) {
-            // Increment click count for tracking
             await Url.updateOne({ shortCode }, { $inc: { clicks: 1 } })
-
-            // Log success and send the original URL in the response
             logger.info(`Found original URL for short code ${shortCode}: ${url.originalUrl}`)
             return res.status(200).json({ originalUrl: url.originalUrl })
         } else {
-            // Log if short code not found
             logger.warn(`Short code not found: ${shortCode}`)
             return res.status(404).json({ message: 'URL not found' })
         }
     } catch (error) {
-        // Log any server errors and respond with a 500 status
         logger.error('Error redirecting to URL:', error)
         return res.status(500).json({ message: 'Server error' })
     }

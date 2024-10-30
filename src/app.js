@@ -25,9 +25,12 @@ app.use(cors(corsOptions))
 // Middleware
 app.use(express.urlencoded({ extended: true })) // Parses incoming URL-encoded data
 app.use(express.json())
-app.use('/api/v1', router)
 app.use(helmet())
 app.use(limiter)
+
+
+// API ENtry Point
+app.use('/api/v1', router)
 
 // 404 Handler
 app.use((req, _, next) => {
